@@ -3,10 +3,7 @@ from django.db import models
 from content.models import ModelBase
 
 
-class Banner(ModelBase):
-    pass
-
-class CodeBanner(Banner):
+class CodeBanner(ModelBase):
     code = models.TextField(
         help_text='The full HTML/Javascript code snippet to be embedded for this banner.'
     )
@@ -15,7 +12,7 @@ class CodeBanner(Banner):
         verbose_name = 'Code Banner'
         verbose_name_plural = 'Code Banners'
 
-class ImageBanner(Banner):
+class ImageBanner(ModelBase):
     url = models.CharField(
         max_length='256', 
         verbose_name='URL', 
