@@ -18,7 +18,6 @@ class models.CodeBanner
     
 CodeBanner model extends content.models.ModelBase. Add code-based banner to CMS containing HTML / Javascript tags.
 
-
 API Reference:
 ~~~~~~~~~~~~~~
 
@@ -42,7 +41,6 @@ ImageBanner:
 class models.ImageBanner
     
 ImageBanner model extends content.models.ModelBase. Add image-based banners linked to either an internal or external URL to CMS.
-
 
 API Reference:
 ~~~~~~~~~~~~~~
