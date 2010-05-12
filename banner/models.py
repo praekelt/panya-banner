@@ -1,9 +1,12 @@
 from django.db import models
 
 from content.models import ModelBase
+from options.models import Options
 
+class Banner(ModelBase):
+    pass
 
-class CodeBanner(ModelBase):
+class CodeBanner(Banner):
     code = models.TextField(
         help_text='The full HTML/Javascript code snippet to be embedded for this banner.'
     )
@@ -12,7 +15,7 @@ class CodeBanner(ModelBase):
         verbose_name = 'Code Banner'
         verbose_name_plural = 'Code Banners'
 
-class ImageBanner(ModelBase):
+class ImageBanner(Banner):
     url = models.CharField(
         max_length='256', 
         verbose_name='URL', 
@@ -22,3 +25,27 @@ class ImageBanner(ModelBase):
     class Meta():
         verbose_name = 'Image Banner'
         verbose_name_plural = 'Image Banners'
+
+class BannerOptions(Options):
+    __module__ = 'options.models'
+
+    class Meta():
+        verbose_name = 'Banner Options'
+        verbose_name_plural = 'Banner Options'
+
+class BannerOption(models.Model):
+    banner_options = models.ForeignKey('options.BannerOptions')
+    is_default = models.BooleanField(
+        verbose_name="Default",
+        default=False,
+    )
+    url_name = models.CharField(
+        max_length=256,
+        verbose_name="URL Name",
+    )
+    url = models.CharField(
+        max_length=256,
+        verbose_name="URL (takes precedence)",
+    )
+    banner = models.ForeignKey('banner.Banner')
+    position = models.CharField(max_length=256)
