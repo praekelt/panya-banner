@@ -5,10 +5,14 @@ from django.contrib import admin
 from banner.models import BannerOption, BannerOptions, CodeBanner, ImageBanner 
 from content.admin import ModelBaseAdmin
 
-def build_url_names(url_patterns):
+def build_url_names(url_patterns=None):
     """
-    Returns a tuple of url pattern names suitable for use in field choices
+    Returns a tuple of url pattern names suitable for use as field choices
     """
+    if not url_patterns:
+        urlconf = settings.ROOT_URLCONF
+        url_patterns = __import__(settings.ROOT_URLCONF, globals(), locals(), ['urlpatterns', ], -1).urlpatterns
+        
     result = []
     for pattern in url_patterns:
         try:
@@ -32,10 +36,8 @@ class BannerOptionAdminForm(forms.ModelForm):
         """
         Set url_name choices to url pattern names
         """
-        urlconf = settings.ROOT_URLCONF
-        url_patterns = __import__(settings.ROOT_URLCONF, globals(), locals(), ['urlpatterns', ], -1).urlpatterns
-        url_names = build_url_names(url_patterns)
-        self.declared_fields['url_name'].choices = url_names
+        url_names = build_url_names()
+        self.declared_fields['url_name'].choices = [('', '---------'),] + url_names
         super(BannerOptionAdminForm, self).__init__(*args, **kwargs)
     
 class BannerOptionInline(admin.TabularInline):

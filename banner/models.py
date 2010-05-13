@@ -42,10 +42,14 @@ class BannerOption(models.Model):
     url_name = models.CharField(
         max_length=256,
         verbose_name="URL Name",
+        blank=True,
+        null=True,
     )
     url = models.CharField(
         max_length=256,
         verbose_name="URL (takes precedence)",
+        blank=True,
+        null=True,
     )
     banner = models.ForeignKey('banner.Banner')
     position = models.CharField(max_length=256)
