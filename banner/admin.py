@@ -27,8 +27,18 @@ def build_url_names(url_patterns=None):
                     pass
     return result
 
+def build_positions():
+    gizmos = __import__(settings.ROOT_GIZMOCONF, globals(), locals(), ['gizmos']).gizmos
+    
+    slot_names = set()
+    for gizmo in gizmos:
+        slot_names.add(gizmo[2])
+       
+    return [(slot_name, slot_name.replace('_', ' ').title()) for slot_name in slot_names]
+
 class BannerOptionAdminForm(forms.ModelForm):
-    url_name = forms.ChoiceField(choices=(('1','1'),))
+    url_name = forms.ChoiceField(label='URL Name',)
+    position = forms.ChoiceField(label='Position',)
     class Meta:
         model = BannerOption
 
@@ -37,7 +47,9 @@ class BannerOptionAdminForm(forms.ModelForm):
         Set url_name choices to url pattern names
         """
         url_names = build_url_names()
+        positions = build_positions()
         self.declared_fields['url_name'].choices = [('', '---------'),] + url_names
+        self.declared_fields['position'].choices = [('', '---------'),] + positions
         super(BannerOptionAdminForm, self).__init__(*args, **kwargs)
     
 class BannerOptionInline(admin.TabularInline):
@@ -49,7 +61,6 @@ class BannerOptionsAdmin(admin.ModelAdmin):
         BannerOptionInline,
     ]
     
-
 admin.site.register(BannerOptions, BannerOptionsAdmin)
 admin.site.register(CodeBanner, ModelBaseAdmin)
 admin.site.register(ImageBanner, ModelBaseAdmin)
