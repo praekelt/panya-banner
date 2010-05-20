@@ -16,7 +16,13 @@ def generate():
                 "title": "Image Banner %s Title" % i,
                 "state": "published",
                 "image": random.sample(IMAGES, 1)[0],
-                "url": "/",
+                "url": "http://www.google.com",
+                "sites": {
+                    "model": "sites.Site",
+                    "fields": { 
+                        "name": "example.com"
+                    }
+                },
             },
         })
     
@@ -28,28 +34,14 @@ def generate():
                 "title": "Code Banner %s Title" % i,
                 "state": "published",
                 "image": random.sample(IMAGES, 1)[0],
-                "code": "<< code embed >>",
+                "code": "<strong>strong tag</strong>",
+                "sites": {
+                    "model": "sites.Site",
+                    "fields": { 
+                        "name": "example.com"
+                    }
+                },
             },
         })
-    
-    # gen post photo sizes
-    objects.append({
-        "model": "photologue.PhotoSize",
-        "fields": {
-            "name": "banner_large",
-            "width": "728",
-            "height": "90",
-            "crop": True,
-        },
-    })
-    objects.append({
-        "model": "photologue.PhotoSize",
-        "fields": {
-            "name": "banner_medium",
-            "width": "300",
-            "height": "250",
-            "crop": True,
-        },
-    })
     
     load_json(objects)
