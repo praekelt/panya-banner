@@ -26,6 +26,9 @@ class ImageBanner(Banner):
         verbose_name = 'Image Banner'
         verbose_name_plural = 'Image Banners'
 
+    def get_absolute_url(self):
+        return self.url
+
 class BannerOptions(Options):
     __module__ = 'options.models'
 
