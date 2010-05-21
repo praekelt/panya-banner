@@ -12,8 +12,8 @@ class CodeBanner(Banner):
     )
     
     class Meta():
-        verbose_name = 'Code Banner'
-        verbose_name_plural = 'Code Banners'
+        verbose_name = 'Code banner'
+        verbose_name_plural = 'Code banners'
 
 class ImageBanner(Banner):
     url = models.CharField(
@@ -23,8 +23,8 @@ class ImageBanner(Banner):
     )
     
     class Meta():
-        verbose_name = 'Image Banner'
-        verbose_name_plural = 'Image Banners'
+        verbose_name = 'Image banner'
+        verbose_name_plural = 'Image banners'
 
     def get_absolute_url(self):
         return self.url
@@ -33,8 +33,8 @@ class BannerOptions(Options):
     __module__ = 'options.models'
 
     class Meta():
-        verbose_name = 'Banner Options'
-        verbose_name_plural = 'Banner Options'
+        verbose_name = 'Banner options'
+        verbose_name_plural = 'Banner options'
 
 class BannerOption(models.Model):
     banner_options = models.ForeignKey('options.BannerOptions')
