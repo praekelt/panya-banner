@@ -1,6 +1,7 @@
 from django import template
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, Resolver404
+from django.utils.encoding import smart_str
 
 from options import options
 register = template.Library()
@@ -32,7 +33,6 @@ def resolve_pattern_name(resolver, path):
                 tried.append(pattern.regex.pattern)
         raise Resolver404, {'tried': tried, 'path': new_path}
     raise Resolver404, {'path' : path}
-
 
 def resolve_banner(request, position):
     resolved_banner = None
