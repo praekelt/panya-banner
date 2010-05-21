@@ -43,5 +43,5 @@ def generate():
                 },
             },
         })
-    
+
     load_json(objects)
