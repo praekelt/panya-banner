@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 
 from banner.models import BannerOption, BannerOptions, CodeBanner, ImageBanner 
-from content.admin import ModelBaseAdmin
+from panya.admin import ModelBaseAdmin
 
 def build_url_names(url_patterns=None):
     """
