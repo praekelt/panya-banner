@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import admin
 
-from banner.models import BannerOption, BannerOptions, CodeBanner, ImageBanner 
+from banner.models import BannerPreferences, BannerOption, CodeBanner, ImageBanner 
 from panya.admin import ModelBaseAdmin
 
 def build_url_names(url_patterns=None):
@@ -56,11 +56,11 @@ class BannerOptionInline(admin.TabularInline):
     form = BannerOptionAdminForm
     model = BannerOption
 
-class BannerOptionsAdmin(admin.ModelAdmin):
+class BannerPreferencesAdmin(admin.ModelAdmin):
     inlines = [
         BannerOptionInline,
     ]
     
-admin.site.register(BannerOptions, BannerOptionsAdmin)
+admin.site.register(BannerPreferences, BannerOptionsAdmin)
 admin.site.register(CodeBanner, ModelBaseAdmin)
 admin.site.register(ImageBanner, ModelBaseAdmin)

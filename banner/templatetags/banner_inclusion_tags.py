@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, Resolver404
 from django.utils.encoding import smart_str
 
-from options import options
+from preferences import preferences
 register = template.Library()
 
 def resolve_pattern_name(resolver, path):
@@ -36,7 +36,7 @@ def resolve_pattern_name(resolver, path):
 
 def resolve_banner(request, position):
     resolved_banner = None
-    queryset = options.BannerOptions.banneroption_set
+    queryset = preferences.BannerPreferences.banneroption_set
     
     # filter by url_name
     urlconf = getattr(request, "urlconf", settings.ROOT_URLCONF)
@@ -68,7 +68,7 @@ def resolve_banner(request, position):
 
     # if we still don't have a banner fallback to the first default for the position
     if not resolved_banner:
-        queryset = options.BannerOptions.banneroption_set.filter(position__exact=position, is_default=True)
+        queryset = preferences.BannerPreferences.banneroption_set.filter(position__exact=position, is_default=True)
         for banner in queryset:
             bnr = banner.banner
             if bnr.is_permitted:

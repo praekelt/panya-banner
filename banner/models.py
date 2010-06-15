@@ -1,7 +1,7 @@
 from django.db import models
 
 from panya.models import ModelBase
-from options.models import Options
+from preferences.models import Preferences
 
 class Banner(ModelBase):
     pass
@@ -29,15 +29,15 @@ class ImageBanner(Banner):
     def get_absolute_url(self):
         return self.url
 
-class BannerOptions(Options):
-    __module__ = 'options.models'
+class BannerPreferences(Preferences):
+    __module__ = 'preferences.models'
 
     class Meta():
-        verbose_name = 'Banner options'
-        verbose_name_plural = 'Banner options'
+        verbose_name = 'Banner preferences'
+        verbose_name_plural = 'Banner preferences'
 
 class BannerOption(models.Model):
-    banner_options = models.ForeignKey('options.BannerOptions')
+    banner_preferences = models.ForeignKey('preferences.BannerPreferences')
     is_default = models.BooleanField(
         verbose_name="Default",
         default=False,

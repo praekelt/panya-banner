@@ -6,7 +6,7 @@ from django.contrib.sites.models import Site
 
 from banner.templatetags import banner_inclusion_tags
 from banner.models import Banner, BannerOption
-from options import options
+from preferences import preferences
 
 urlpatterns = patterns(
     '',
@@ -27,7 +27,7 @@ class BannerInclusionTagsTestCase(unittest.TestCase):
         unpublished_banner.save()
 
         # setup banneroption
-        option = BannerOption(banner=unpublished_banner, banner_options=options.BannerOptions, url_name="test_view_name", position="header")
+        option = BannerOption(banner=unpublished_banner, banner_preferences=preferences.BannerPreferences, url_name="test_view_name", position="header")
         option.save()
 
         # unpublished banners should not be returned
@@ -42,7 +42,7 @@ class BannerInclusionTagsTestCase(unittest.TestCase):
         published_banner.sites.add(web_site)
 
         # setup banneroption
-        option = BannerOption(banner=published_banner, banner_options=options.BannerOptions, url_name="test_view_name", position="header")
+        option = BannerOption(banner=published_banner, banner_preferences=preferences.BannerPreferences, url_name="test_view_name", position="header")
         option.save()
 
         # published banners should be returned
@@ -60,7 +60,7 @@ class BannerInclusionTagsTestCase(unittest.TestCase):
         published_banner2.sites.add(web_site)
 
         # setup banneroption by url
-        option = BannerOption(banner=published_banner2, banner_options=options.BannerOptions, url_name="test_view_name", url="/some/path", position="header")
+        option = BannerOption(banner=published_banner2, banner_preferences=preferences.BannerPreferences, url_name="test_view_name", url="/some/path", position="header")
         option.save()
         # banner with url specified takes priority 
         self.failIfEqual(published_banner2, banner_inclusion_tags.resolve_banner(request, 'header'))
@@ -74,7 +74,7 @@ class BannerInclusionTagsTestCase(unittest.TestCase):
         published_banner3.sites.add(web_site)
         
         # setup banneroption
-        option = BannerOption(banner=published_banner3, banner_options=options.BannerOptions, url_name="test_view_name", position="header", is_default=True)
+        option = BannerOption(banner=published_banner3, banner_preferences=preferences.BannerPreferences, url_name="test_view_name", position="header", is_default=True)
         option.save()
         
         # in case no banner is found directly, fall back to default for gizmo slot
