@@ -61,6 +61,6 @@ class BannerPreferencesAdmin(admin.ModelAdmin):
         BannerOptionInline,
     ]
     
-admin.site.register(BannerPreferences, BannerOptionsAdmin)
+admin.site.register(BannerPreferences, BannerPreferencesAdmin)
 admin.site.register(CodeBanner, ModelBaseAdmin)
 admin.site.register(ImageBanner, ModelBaseAdmin)
