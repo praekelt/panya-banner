@@ -1,6 +1,6 @@
 include AUTHORS
 include LICENSE
 include README.rst
-recursive-include gallery/fixtures *
-recursive-include gallery/templates *
-recursive-include gallery/templatetags *
+recursive-include banner/fixtures *
+recursive-include banner/templates *
+recursive-include banner/templatetags *
