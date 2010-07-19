@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='panya-banner',
-    version='0.0.2',
+    version='0.0.3',
     description='Panya banner app.',
     long_description = open('README.rst', 'r').read(),
     author='Praekelt Foundation',
