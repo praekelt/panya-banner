@@ -1,3 +1,5 @@
+from copy import copy
+
 from django import template
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, Resolver404
@@ -79,10 +81,12 @@ def resolve_banner(request, position):
     
 @register.inclusion_tag('banner/inclusion_tags/banner_wide_gizmo.html', takes_context=True)
 def banner_wide_gizmo(context):
+    context = copy(context)
     context.update({'object': resolve_banner(context['request'], position=context['gizmo_slot_name'])})
     return context
 
 @register.inclusion_tag('banner/inclusion_tags/banner_block_gizmo.html', takes_context=True)
 def banner_block_gizmo(context):
+    context = copy(context)
     context.update({'object': resolve_banner(context['request'], position=context['gizmo_slot_name'])})
     return context
